@@ -1,0 +1,3 @@
+
+#define DISABLE_OUTPUT 0
+#define THREAD_COUNT 2
