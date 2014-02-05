@@ -11,3 +11,13 @@
 *.lai
 *.la
 *.a
+
+#xcode & appcode
+.DS_Store
+.idea/
+
+#windows
+Thumbs.db
+
+#Build folder
+Build/
