@@ -1,2 +1,1 @@
-
 #define DISABLE_OUTPUT 1
