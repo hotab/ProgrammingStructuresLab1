@@ -19,13 +19,22 @@ Matrix::Matrix(int n, bool gen)
     size = n;
     a = NULL;
     if(gen) generate();
+    else
+    {
+        a = new double*[size];
+        for(int i = 0; i<size; ++i)
+            a[i] = new double[size];
+    }
 }
 
 Matrix::~Matrix()
 {
-    for(int i = 0; i<size; ++i)
-        delete[] a[i];
-    delete[] a;
+    if(a!=NULL)
+    {
+        for(int i = 0; i<size; ++i)
+            delete[] a[i];
+        delete[] a;
+    }
 }
 
 Matrix *Matrix::buildInverted()
@@ -64,7 +73,7 @@ Matrix *Matrix::buildInverted()
             subtractRows(temp_a[k], temp_a[i], size*2, temp_a[k][i]/temp_a[i][i]);
     }
 
-    //Make 1-s over main diagonal
+    //Make 0-s over main diagonal
     for(int i = size-1; i>=0; --i)
         for(int k = i-1; k>=0; --k)
             subtractRows(temp_a[k], temp_a[i], size*2, temp_a[k][i]/temp_a[i][i]);
@@ -92,7 +101,7 @@ Matrix *Matrix::buildInverted()
     return m;
 }
 
-double Matrix::operator ()(int i, int j)
+double& Matrix::operator ()(int i, int j)
 {
     if(i >= 0 && i<size && j>=0 && j<size)
         return a[i][j];

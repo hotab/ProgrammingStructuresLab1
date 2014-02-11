@@ -20,7 +20,7 @@ public:
     ~Matrix();
     void generate();
     Matrix* buildInverted();
-    double operator()(int i, int j);
+    double& operator()(int i, int j);
     static void subtractRows(double* row1, double* row2, int len, double k);
     static void swapRows(double*& row1, double*& row2, int c);
 };

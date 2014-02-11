@@ -10,12 +10,8 @@
 #import "matrix.h"
 
 using namespace std;
-
-int main(int argc, const char * argv[])
+void performTest(int N)
 {
-
-    int N;
-    cin >> N;
     Matrix m1(N);
     cout.setf(ios::fixed);
 #if !DISABLE_OUTPUT
@@ -36,16 +32,38 @@ int main(int argc, const char * argv[])
 #if !DISABLE_OUTPUT
 
     else
-    for(int i = 0; i<N; ++i)
-    {
-        for(int j = 0; j<N; ++j)
-            cout << (*m2)(i,j) << ' ';
-        cout << endl;
-    }
+        for(int i = 0; i<N; ++i)
+        {
+            for(int j = 0; j<N; ++j)
+                cout << (*m2)(i,j) << ' ';
+            cout << endl;
+        }
     cout << endl;
 #endif
 
     if(m2!=NULL) delete m2;
+}
+int main(int argc, const char * argv[])
+{
+
+    /*int N;
+    cin >> N;    */
+    for(int i = 2; i<=2048; i*=2)
+    {
+        int testTotal = 0;
+        int testCount = 0;
+        while(testTotal < CLOCKS_PER_SEC*3)
+        {
+            int startTime = clock();
+            performTest(i);
+            int endTime = clock();
+            testTotal += endTime- startTime;
+            ++testCount;
+        }
+        cout << i << "\t" << (((double)testTotal)/testCount) / CLOCKS_PER_SEC;
+        cout << endl;
+
+    }
 
     return 0;
 }
